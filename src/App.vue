@@ -3,12 +3,7 @@
     <input type="text">
     <button type="button">Add</button>
     <ul>
-      <li>leite</li>
-      <li>banana</li>
-      <li>chocolate</li>
-      <li>maça</li>
-      <li>pipoca</li>
-      <li>bolo</li>
+      <li v-for="item in list">{{item}}</li>
     </ul>
   </div>
 </template>
@@ -18,7 +13,14 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      list: [
+          'leite',
+          'banana',
+          'chocolate',
+          'maça',
+          'pipoca',
+          'bolo'
+      ]
     }
   }
 }
@@ -41,6 +43,7 @@ h1, h2 {
 ul {
   list-style-type: none;
   padding: 0;
+    border: 1px solid #bdbdbd;
 }
 
 li {
