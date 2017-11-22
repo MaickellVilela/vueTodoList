@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <input type="text">
-    <button type="button">Add</button>
+    <input type="text" @change="addItem($event.target.value)">
     <ul>
       <li v-for="item in list">{{item}}</li>
     </ul>
@@ -22,7 +21,12 @@ export default {
           'bolo'
       ]
     }
-  }
+  },
+    methods: {
+        addItem(value) {
+            this.list.push(value)
+        }
+    }
 }
 </script>
 
