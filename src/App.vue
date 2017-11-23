@@ -11,11 +11,11 @@
         <div v-if="isEmptyItemValue"><small>Informe um valor para o item</small></div>
 
         <ul v-if="showList">
-            <li v-for="item in list">
+            <li v-for="(item, index) in list">
                 <div class="item">
                     <div>{{item}}</div>
                     <div>
-                        <button @click="removeValue(item)">Remover</button>
+                        <button @click="removeValue(index)">Remover</button>
                     </div>
                 </div>
             </li>
@@ -75,8 +75,7 @@
             updateValue(value) {
                 this.inputValue = value;
             },
-            removeValue(value){
-                let index = this.list.indexOf(value);
+            removeValue(index){
                 this.list.splice(index, 1);
             },
             clearInput() {
