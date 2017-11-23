@@ -3,7 +3,7 @@
         <h1 v-text="title"></h1>
         <!-- mostrar a diferença entre  -->
         <input-field placeholder="seu item aqui"
-                     :value="pegarInputValue"
+                     :inputValue="inputValue"
                      @input="updateValue"
                      @change="inputWasChanged"></input-field>
         <div><p>Exemplo: Batata custando 21.75 ou Peixe ou Fruta custando 14</p></div>
@@ -53,9 +53,6 @@
             itemsCount() {
                 let length = this.list.length;
                 return `${length} ${length > 1 ? 'items custando' : 'item custando'} R$ ${this.totalSomado.toFixed(2)}`
-            },
-            pegarInputValue(){
-                return this.inputValue;
             }
         },
         methods: {
