@@ -16,7 +16,7 @@
         </contador-field>
         <ul v-if="showList" v-for="item in list">
             <li>{{item.nome}}</li>
-            <li>{{item.preco}}</li>
+            <li>R$ {{item.preco.toFixed(2)}}</li>
         </ul>
     </div>
 </template>
@@ -44,6 +44,9 @@
             }
         },
         computed: {
+            retornaLista(){
+                return this.list;
+            },
             showList() {
                 return this.list.length > 0
             },
@@ -62,8 +65,8 @@
                 this.calcularTotal();
             },
             acaoButtonReset(){
-                this.list = [];
                 this.clearInput();
+                this.list = [];
                 this.calcularTotal();
                 alert('Limpo');
             },
@@ -85,6 +88,8 @@
                     if(typeof this.totalSomado == "object"){
                         this.totalSomado = this.totalSomado.preco;
                     }
+                } else {
+                    this.totalSomado = 0;
                 }
             },
             quebraValor(value){
@@ -143,5 +148,30 @@
 
     a {
         color: #42b983;
+    }
+
+    ul {
+        padding:0px;
+        margin:0px;
+        background-color:#EDEDED;
+        list-style:none;
+    }
+
+    ul li { display: inline; }
+
+    ul li a {
+        padding: 2px 10px;
+        display: inline-block;
+
+        /* visual do link */
+        background-color:#EDEDED;
+        color: #333;
+        text-decoration: none;
+        border-bottom:3px solid #EDEDED;
+    }
+    ul li a:hover {
+        background-color:#D6D6D6;
+        color: #6D6D6D;
+        border-bottom:3px solid #EA0000;
     }
 </style>
