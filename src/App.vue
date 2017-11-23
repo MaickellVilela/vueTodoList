@@ -4,13 +4,16 @@
                :value="inputValue"
                :placeholder="placeholer"
                @change="addItem($event.target.value)">
-        <ul>
+
+        <!-- dar exemplo do v-if -->
+        <ul v-show="showList">
             <li v-for="item in list">{{item}}</li>
         </ul>
     </div>
 </template>
 
 <script>
+
     export default {
         name: 'app',
         data () {
@@ -18,6 +21,11 @@
                 list: [],
                 inputValue: '',
                 placeholer: 'shopping list'
+            }
+        },
+        computed: {
+            showList() {
+                return this.list.length > 0
             }
         },
         methods: {
