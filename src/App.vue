@@ -4,18 +4,17 @@
         <input-field placeholder="seu item aqui"
                      :inputValue="inputValue"
                      @input="updateValue"
-                     @change="setItemValue"
                      ></input-field>
-        <button @click="addItem">Adicionar Item</button>
+        <button @click="addItem(inputValue)">Adicionar Item</button>
 
         <div v-if="isEmptyItemValue"><small>Informe um valor para o item</small></div>
 
         <ul v-if="showList">
-            <li v-for="(item, index) in list">
+            <li v-for="(item, index) in getList">
                 <div class="item">
                     <div>{{item}}</div>
                     <div>
-                        <button @click="removeValue(index)">Remover</button>
+                        <button @click="removeItem(index)">Remover</button>
                     </div>
                 </div>
             </li>
@@ -35,19 +34,20 @@
         },
         data () {
             return {
-                list: [],
                 inputValue: '',
                 placeholder: 'novo item...',
                 title: 'Lista de Compras Before'
             }
         },
         computed: {
-            ...mapGetters([]),
+            ...mapGetters([
+                'getList'
+            ]),
             showList() {
-                return this.list.length > 0
+                return this.getList.length > 0
             },
             itemsCount() {
-                let length = this.list.length;
+                let length = this.getList.length;
                 return `${length} ${length > 1 ? 'items' : 'item'}`
             },
             isEmptyItemValue(){
@@ -56,30 +56,13 @@
             }
         },
         methods: {
-            ...mapMutations([]),
+            ...mapMutations([
+                'addItem',
+                'removeItem'
+            ]),
             ...mapActions([]),
-            setItemValue(value){
-                this.item = value;
-            },
-            addItem() {
-
-                if(this.item){
-                    this.list.push(this.item);
-                    this.item = null;
-                    this.errorValue = false;
-                    this.clearInput();
-                    return;
-                }
-                this.errorValue = true;
-            },
             updateValue(value) {
                 this.inputValue = value;
-            },
-            removeValue(index){
-                this.list.splice(index, 1);
-            },
-            clearInput() {
-                this.inputValue = '';
             }
         }
     }
