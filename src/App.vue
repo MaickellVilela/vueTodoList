@@ -4,7 +4,8 @@
         <!-- mostrar a diferença entre  -->
         <input-field placeholder="seu item aqui"
                      :inputValue="inputValue"
-                     @change="addItem"></input-field>
+                     @input="updateValue"
+                     @change="inputWasChanged"></input-field>
         <ul v-if="showList">
             <li v-for="item in list">{{item}}</li>
         </ul>
@@ -37,8 +38,18 @@
             }
         },
         methods: {
+            inputWasChanged(value) {
+                this.addItem(value);
+                this.clearInput();
+            },
             addItem(value) {
                 this.list.push(value)
+            },
+            updateValue(value) {
+                this.inputValue = value;
+            },
+            clearInput() {
+                this.inputValue = '';
             }
         }
     }
