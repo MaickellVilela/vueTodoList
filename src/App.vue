@@ -1,11 +1,10 @@
 <template>
     <div id="app">
         <h1 v-text="title"></h1>
-        <input type="text"
-               :value="inputValue"
-               :placeholder="placeholer"
-               @change="addItem($event.target.value)">
-
+        <!-- mostrar a diferença entre  -->
+        <input-field placeholder="seu item aqui"
+                     :inputValue="inputValue"
+                     @change="addItem"></input-field>
         <ul v-if="showList">
             <li v-for="item in list">{{item}}</li>
         </ul>
@@ -14,14 +13,17 @@
 </template>
 
 <script>
-
+    import inputField from './components/input.vue';
     export default {
         name: 'app',
+        components: {
+            inputField
+        },
         data () {
             return {
                 list: [],
                 inputValue: '',
-                placeholer: 'novo item...',
+                placeholder: 'novo item...',
                 title: 'Lista de Compras Before'
             }
         },
