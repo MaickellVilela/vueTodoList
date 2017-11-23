@@ -1,14 +1,15 @@
 <template>
     <div id="app">
+        <h1 v-text="title"></h1>
         <input type="text"
                :value="inputValue"
                :placeholder="placeholer"
                @change="addItem($event.target.value)">
 
-        <!-- dar exemplo do v-if -->
-        <ul v-show="showList">
+        <ul v-if="showList">
             <li v-for="item in list">{{item}}</li>
         </ul>
+        <div class="count">{{ itemsCount }}</div>
     </div>
 </template>
 
@@ -20,12 +21,17 @@
             return {
                 list: [],
                 inputValue: '',
-                placeholer: 'shopping list'
+                placeholer: 'novo item...',
+                title: 'Lista de Compras Before'
             }
         },
         computed: {
             showList() {
                 return this.list.length > 0
+            },
+            itemsCount() {
+                let length = this.list.length;
+                return `${length} ${length > 1 ? 'items' : 'item'}`
             }
         },
         methods: {
@@ -59,6 +65,7 @@
     li {
         display: block;
         margin: 0 10px;
+        font-size: 2rem;
     }
 
     a {
@@ -66,8 +73,19 @@
     }
 
     input {
-        padding:.3rem;
-        border-radius: .3rem;
+        font-size: 2rem;
+        padding: 1rem;
+        border-radius: .8rem;
         border: 1px solid #bdbdbd;
+        outline: none;
+        &:focus {
+            border-color: #ff9e00;
+            box-shadow: 3px 3px 5px rgba(#ff9e00, 0.4);
+        }
+    }
+
+    .count {
+        text-align: right;
+        margin-right: 3rem;
     }
 </style>
