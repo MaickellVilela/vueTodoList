@@ -15,14 +15,7 @@
         name: 'app',
         data () {
             return {
-                list: [
-                    'leite',
-                    'banana',
-                    'chocolate',
-                    'maça',
-                    'pipoca',
-                    'bolo'
-                ],
+                list: [],
                 inputValue: '',
                 placeholer: 'shopping list'
             }
