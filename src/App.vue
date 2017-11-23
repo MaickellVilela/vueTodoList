@@ -26,6 +26,8 @@
 
 <script>
     import inputField from './components/input.vue';
+    import { mapGetters, mapMutations, mapActions } from 'vuex';
+
     export default {
         name: 'app',
         components: {
@@ -40,6 +42,7 @@
             }
         },
         computed: {
+            ...mapGetters([]),
             showList() {
                 return this.list.length > 0
             },
@@ -53,6 +56,8 @@
             }
         },
         methods: {
+            ...mapMutations([]),
+            ...mapActions([]),
             setItemValue(value){
                 this.item = value;
             },
