@@ -10,7 +10,7 @@
         <div v-if="isEmptyItemValue"><small>Informe um valor para o item</small></div>
 
         <ul v-if="showList">
-            <li v-for="(item, index) in getList">
+            <li :key="index" v-for="(item, index) in getList">
                 <div class="item">
                     <div>{{item}}</div>
                     <div>
@@ -31,6 +31,9 @@
         name: 'app',
         components: {
             inputField
+        },
+        created(){
+            this.requestList();
         },
         data () {
             return {
@@ -60,7 +63,9 @@
                 'addItem',
                 'removeItem'
             ]),
-            ...mapActions([]),
+            ...mapActions([
+                'requestList'
+            ]),
             updateValue(value) {
                 this.inputValue = value;
             }
