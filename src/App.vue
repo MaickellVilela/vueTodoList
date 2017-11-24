@@ -1,24 +1,38 @@
 <template>
     <div id="app">
-        <h1 v-text="title"></h1>
-        <!-- mostrar a diferença entre  -->
+
+        <title-field :title="title"></title-field>
+
         <input-field placeholder="seu item aqui"
                      :inputValue="inputValue"
-                     @input="updateValue"
-                     @change="inputWasChanged"></input-field>
-        <ul v-if="showList">
-            <li v-for="item in list">{{item}}</li>
-        </ul>
-        <div class="count">{{ itemsCount }}</div>
+                     @input="updateValue">
+        </input-field>
+
+        <button @click="addItemToList">
+            + Adicionar
+        </button>
+
+        <list :showList="showList"
+              :itens="list">
+        </list>
+
+        <counter :itemsCount="itemsCount"></counter>
     </div>
 </template>
 
 <script>
     import inputField from './components/input.vue';
+    import titleField from './components/title.vue';
+    import counter from './components/counter.vue';
+    import list from './components/list.vue';
+
     export default {
         name: 'app',
         components: {
-            inputField
+            inputField,
+            titleField,
+            counter,
+            list
         },
         data () {
             return {
@@ -38,8 +52,8 @@
             }
         },
         methods: {
-            inputWasChanged(value) {
-                this.addItem(value);
+            addItemToList() {
+                this.addItem(this.inputValue);
                 this.clearInput();
             },
             addItem(value) {
@@ -56,6 +70,7 @@
 </script>
 
 <style lang="scss">
+
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -65,40 +80,8 @@
         margin-top: 60px;
     }
 
-    h1, h2 {
-        font-weight: normal;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-        border: 1px solid #bdbdbd;
-    }
-
-    li {
-        display: block;
-        margin: 0 10px;
-        font-size: 2rem;
-    }
-
     a {
         color: #42b983;
     }
 
-    input {
-        font-size: 2rem;
-        padding: 1rem;
-        border-radius: .8rem;
-        border: 1px solid #bdbdbd;
-        outline: none;
-        &:focus {
-            border-color: #ff9e00;
-            box-shadow: 3px 3px 5px rgba(#ff9e00, 0.4);
-        }
-    }
-
-    .count {
-        text-align: right;
-        margin-right: 3rem;
-    }
 </style>
