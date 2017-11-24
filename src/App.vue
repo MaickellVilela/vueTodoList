@@ -73,11 +73,11 @@
             ...mapMutations([
                 'addItem',
                 'removeItem',
-                'addQuantity',
-                'subQuantity'
+                'addQuantity'
             ]),
             ...mapActions([
-                'requestList'
+                'requestList',
+                'subQuantity'
             ]),
             updateValue(value) {
                 this.inputValue = value;
