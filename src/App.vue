@@ -11,7 +11,12 @@
         <ul v-if="showList">
             <li :key="index" v-for="(item, index) in getList">
                 <div class="item">
-                    <div>{{item}}</div>
+                    <div class="food" 
+                        @click.shift="addQuantity(index)"
+                        @click.alt="subQuantity(index)">
+                        <strong>{{item.name}}</strong>
+                        <span>{{item.qtd}}</span>
+                    </div>
                     <div>
                         <button @click="removeItem(index)">Remover</button>
                     </div>
@@ -67,7 +72,9 @@
         methods: {
             ...mapMutations([
                 'addItem',
-                'removeItem'
+                'removeItem',
+                'addQuantity',
+                'subQuantity'
             ]),
             ...mapActions([
                 'requestList'
@@ -136,9 +143,17 @@
             box-shadow: 3px 3px 5px rgba(#ff9e00, 0.4);
         }
     }
+    button {
+        cursor: pointer;
+    }
 
     .count {
         text-align: right;
         margin-right: 3rem;
+    }
+
+    .food{
+        cursor: pointer;
+        user-select: none;
     }
 </style>
