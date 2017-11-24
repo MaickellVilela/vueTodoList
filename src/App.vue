@@ -2,8 +2,7 @@
     <div id="app">
         <h1 v-text="title"></h1>
         <input-field placeholder="seu item aqui"
-                     :inputValue="inputValue"
-                     @input="updateValue"
+                     v-model="input"
                      ></input-field>
         <button @click="addItem(inputValue)">Adicionar Item</button>
 
@@ -46,6 +45,14 @@
             ...mapGetters([
                 'getList'
             ]),
+            input:{
+                get(){
+                    return this.inputValue
+                },
+                set(value){
+                    this.inputValue = value
+                }
+            },
             showList() {
                 return this.getList.length > 0
             },
@@ -54,7 +61,6 @@
                 return `${length} ${length > 1 ? 'items' : 'item'}`
             },
             isEmptyItemValue(){
-                console.log(this.errorValue);
                 return this.errorValue;
             }
         },
@@ -92,6 +98,7 @@
         padding: 0.5rem;
         border: 1px solid #bdbdbd;
         width: 50%;
+        margin: 1rem auto 0;
     }
 
     li {

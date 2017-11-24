@@ -1,6 +1,6 @@
 <template>
     <input type="text"
-           :value="inputValue"
+           :value="value"
            :placeholder="placeholder"
            @input="$emit('input', $event.target.value)"
            @change="$emit('change', $event.target.value)">
@@ -10,7 +10,7 @@
     export default {
         name: 'inputField',
         props: {
-            inputValue: String,
+            value: String,
             placeholder: {
                 type: String,
                 default: ''
